@@ -1,13 +1,15 @@
 package com.jobsuggestbackend.model;
 
+import com.jobsuggestbackend.model.Enum.RoleEnum;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
 
     @Id
@@ -18,17 +20,28 @@ public class User {
     )
     private UUID Id;
 
+    @Column(nullable = false)
     private String username;
 
+    @Column(nullable = false)
     private String password;
 
+    @Column(unique = true, nullable = false)
     private String email;
 
     private LocalDateTime deletionDate;
 
+
     private LocalDateTime creationDate;
 
     private LocalDateTime LastLogin;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private RoleEnum systemRole;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Role> roles;
 
     public UUID getId() {
         return Id;
@@ -84,5 +97,21 @@ public class User {
 
     public void setLastLogin(LocalDateTime lastLogin) {
         LastLogin = lastLogin;
+    }
+
+    public RoleEnum getSystemRole() {
+        return systemRole;
+    }
+
+    public void setSystemRole(RoleEnum systemRole) {
+        this.systemRole = systemRole;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }
