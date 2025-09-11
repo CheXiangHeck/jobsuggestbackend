@@ -10,6 +10,7 @@ public class UserController {
 
     @PostMapping("/register")
     public String register() {
+        
         return "List of users";
     }
 
