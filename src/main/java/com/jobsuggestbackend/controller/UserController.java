@@ -1,5 +1,6 @@
 package com.jobsuggestbackend.controller;
 
+import com.jobsuggestbackend.DTO.UserLoginDTO;
 import com.jobsuggestbackend.DTO.UserRegisterInputDTO;
 import com.jobsuggestbackend.application.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login() {
-        return "";
+    public String login(@RequestBody UserLoginDTO inputLoginDTO) {
+        return userService.login(inputLoginDTO);
     }
 
     @PostMapping("/registerModerator")
