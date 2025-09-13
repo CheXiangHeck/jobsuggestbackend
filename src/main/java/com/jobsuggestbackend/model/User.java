@@ -42,7 +42,10 @@ public class User {
     @Column(nullable = false)
     private RoleEnum systemRole = RoleEnum.USER;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Resume resume;
+
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Role> roles;
 
     public User() {};
@@ -122,6 +125,14 @@ public class User {
 
     public void setSystemRole(RoleEnum systemRole) {
         this.systemRole = systemRole;
+    }
+
+    public Resume getResume() {
+        return resume;
+    }
+
+    public void setResume(Resume resume) {
+        this.resume = resume;
     }
 
     public List<Role> getRoles() {
