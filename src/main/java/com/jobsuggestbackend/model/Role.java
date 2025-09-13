@@ -10,30 +10,26 @@ import java.util.UUID;
 @Table(name = "role")
 public class Role {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name    = "UUID",
-            strategy = "org.hibernate.id.GenericGenerator"
-    )
-    private UUID Id;
+    @GeneratedValue
+    private long Id;
 
     @Column(nullable = false)
     private String rolesName;
 
     private String description;
 
-    @OneToMany(mappedBy = "roles", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Feature> features;
 
     @ManyToOne(fetch = FetchType.LAZY)  // Many roles -> one user
     @JoinColumn(name = "user_id", nullable = false) // Foreign key column
     private User user;
 
-    public UUID getId() {
+    public long getId() {
         return Id;
     }
 
-    public void setId(UUID id) {
+    public void setId(long id) {
         Id = id;
     }
 

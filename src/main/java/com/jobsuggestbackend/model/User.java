@@ -2,6 +2,7 @@ package com.jobsuggestbackend.model;
 
 import com.jobsuggestbackend.model.Enum.RoleEnum;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
@@ -9,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 
     @Id
@@ -31,17 +32,33 @@ public class User {
 
     private LocalDateTime deletionDate;
 
-
-    private LocalDateTime creationDate;
+    @CreationTimestamp
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime creationDate = LocalDateTime.now();
 
     private LocalDateTime LastLogin;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private RoleEnum systemRole;
+    private RoleEnum systemRole = RoleEnum.USER;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Role> roles;
+
+    public User() {};
+
+    public User(String username, String password, String email) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    };
+
+    public User(String username, String password, String email, RoleEnum systemRole) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.systemRole = systemRole;
+    }
 
     public UUID getId() {
         return Id;

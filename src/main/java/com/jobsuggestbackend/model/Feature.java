@@ -16,7 +16,7 @@ public class Feature {
     private String value;
 
     @ManyToOne(fetch = FetchType.LAZY)  // Many posts -> one user
-    @JoinColumn(name = "roles_id", nullable = false) // Foreign key column
+    @JoinColumn(name = "role_id", nullable = false) // Foreign key column
     private Role role;
 
     public long getId() {
