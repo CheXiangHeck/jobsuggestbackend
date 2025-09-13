@@ -53,6 +53,13 @@ public class User {
         this.email = email;
     };
 
+    public User(String username, String password, String email, RoleEnum systemRole) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.systemRole = systemRole;
+    }
+
     public UUID getId() {
         return Id;
     }
