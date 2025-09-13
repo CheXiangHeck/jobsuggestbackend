@@ -31,4 +31,7 @@ public class UserController {
     public String registerModerator(@RequestBody UserRegisterInputDTO inputDTO) {
         return userService.registerModerator(inputDTO);
     }
+
+    @PostMapping("/createProfile")
+    public String createProfile(){return "Create Profile";}
 }
