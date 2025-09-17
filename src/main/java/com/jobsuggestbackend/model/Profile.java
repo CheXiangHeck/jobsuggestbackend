@@ -24,7 +24,7 @@ public class Profile {
     private List<Certification> certifications;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "users_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     public long getId() {
