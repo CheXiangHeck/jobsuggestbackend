@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
+import java.util.Map;
 import java.util.UUID;
 
 @ControllerAdvice
@@ -25,8 +26,15 @@ public class ErrorLogGlobalSave {
         // API path for reference
         String apiPath = request.getDescription(false); // e.g., "uri=/api/users/register"
 
+        /*
+        !!Need to pass insert to the error log!!
+        Map<String, String[]> apiParams = request.getParameterMap();
+         */
+
         // Save error globally
         errorLoggerService.saveError(userId, ex.getMessage(), apiPath);
+
+
 
         // Return generic error to client
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

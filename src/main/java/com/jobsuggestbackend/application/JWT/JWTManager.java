@@ -9,17 +9,16 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
 public class JWTManager {
-    @Value("${application.security.jwt.secret-key}")
+    @Value("${app.security.jwt.secret-key}")
     private String secretKey;
 
-    @Value("${application.security.jwt.expiration}")
+    @Value("${app.security.jwt.expiration}")
     private long expiration;
 
     public String generateToke(User user) {
